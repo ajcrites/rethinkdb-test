@@ -17,10 +17,22 @@ import r from 'rethinkdb';
             }
 
             const args = req.url.split("/");
-            if (2 == args.length) {
-                const user = args[2];
-                await r.table("todo").get;
+            if (2 === args.length) {
+                const user = args[1];
+                const todos = await r.table("todo").filter({user}).without("user").run(conn);
+                return res.end(JSON.stringify(await todos.toArray()));
             }
+            if (
+                4 === args.length && "POST" === req.method.toUpperCase()
+                && args[1] === "todo"
+            ) {
+                const id = args[2];
+                const complete = args[3] === "complete";
+                await r.table("todo").get(id).update({complete}).run(conn);
+                return res.end();
+            }
+
+            res.writeHead(404);
             res.end();
         });
 
