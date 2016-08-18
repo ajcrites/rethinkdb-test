@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
       "db": "docker build -t local-rethinkdb . && docker run --name rethinkdb -v \"$PWD:/data\" -d -p 8080:8080 -p 28015:28015 local-rethinkdb",
+    "seed": "node_modules/.bin/babel-node seed",
     "start": "node_modules/.bin/babel-node ."
   },
   "author": "",

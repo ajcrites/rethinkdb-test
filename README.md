@@ -7,9 +7,16 @@ Inspired by day one of [Seven Databases in Seven Days](https://developer.ibm.com
 
 Other than that, npm and `npm install`.
 
-## Running
+## Initializing
 Use `npm run db` to start `rethinkdb`. You can connect to
 the admin panel with `localhost:8080`. 28015 is the port
 to access the DB and is used in the app by default.
 
-Use `npm start` to run the app itself.
+Use `npm run seed` to create the database, tables, seed
+with data, and create indicies. *Note:* there is currently
+no way to programmatically delete the database and you
+cannot create it again once it exists. You can use the
+admin panel to delete it, though.
+
+## Running
+Use `npm start` to run the app.
