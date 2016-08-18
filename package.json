@@ -1,0 +1,24 @@
+{
+  "name": "rethinkdb-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+      "db": "docker build -t local-rethinkdb . && docker run --name rethinkdb -v \"$PWD:/data\" -d -p 8080:8080 -p 28015:28015 local-rethinkdb",
+    "start": "node_modules/.bin/babel-node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.11.4",
+    "rethinkdb": "^2.3.2"
+  },
+  "devDependencies": {
+    "babel-plugin-syntax-async-functions": "^6.8.0",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-plugin-transform-regenerator": "^6.9.0",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0"
+  }
+}
