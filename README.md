@@ -19,4 +19,11 @@ cannot create it again once it exists. You can use the
 admin panel to delete it, though.
 
 ## Running
-Use `npm start` to run the app.
+Use `npm start` to run the app. This will start a server
+on `PORT:=8000` where you can query the DB indirectly
+with `/` for all lists, `/:name` for user Todos, and
+`POST /todo/:id/complete` to mark items as complete
+and `POST /todo/:id/incomplete` to mark items as incomplete.
+
+The server will log real-time data changes, so you can see
+your POST updates being written in real time to RethinkDB.
