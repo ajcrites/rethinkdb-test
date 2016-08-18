@@ -1,14 +1,30 @@
 import r from 'rethinkdb';
-import issues from './seed-db';
+import todos from './todo';
 
 (async () => {
     try {
-        let conn = await r.connect({port: process.env.PORT || 28015});
+        const conn = await r.connect({port: 28015});
 
         // Ensure db/table/key creation
-        await r.dbCreate("issues").run(conn);
-        await r.db("issues").tableCreate("issues").run(conn);
-        await r.db("issues").table("issues").insert(issues).run(conn);
+        await r.dbCreate("todo").run(conn);
+        conn.use("todo");
+        await Promise.all([
+            r.tableCreate("users", {primaryKey: "name"}).run(conn),
+            r.tableCreate("todo").run(conn),
+        ]);
+        await r.table("todo").indexCreate("user").run(conn);
+        const named = {};
+
+        // Seed database
+        await Promise.all(todos.map(async todo => {
+            // Insert unique users
+            const user = named[todo.user];
+            if (!user) {
+                await r.table("users").insert({name: todo.user}).run(conn);
+                named[todo.user] = true;
+            }
+            await r.table("todo").insert(todo).run(conn);
+        }));
 
         await conn.close();
     }

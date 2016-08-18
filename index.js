@@ -1,12 +1,30 @@
+import {createServer} from 'http';
 import r from 'rethinkdb';
+
 
 (async () => {
     try {
-        let conn = await r.connect({port: process.env.PORT || 28015});
-        let cursor = await r.db("issues").table("issues").run(conn);
+        const conn = await r.connect({port: 28015, db: "todo"});
+        const cursor = await r.table("todo").changes().run(conn);
 
-        await cursor.eachAsync(row => console.log(row));
-        cursor = await r.db("issues").table("issues").changes().run(conn);
+        cursor.each((err, row) => console.log(row));
+
+        const server = createServer(async (req, res) => {
+            if ("/" === req.url) {
+                const lists = await r.table("todo").eqJoin("user", r.table("users"))
+                    .without({left: "user"}).zip().run(conn);
+                return res.end(JSON.stringify(await lists.toArray()));
+            }
+
+            const args = req.url.split("/");
+            if (2 == args.length) {
+                const user = args[2];
+                await r.table("todo").get;
+            }
+            res.end();
+        });
+
+        server.listen(process.env.PORT || 8000);
     }
     catch (err) {
         console.error(err);

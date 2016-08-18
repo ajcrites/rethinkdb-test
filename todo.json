@@ -1,0 +1,52 @@
+[
+    {
+        "user": "Andrew",
+        "item": "Learn RethinkDB",
+        "complete": true
+    },
+    {
+        "user": "Andrew",
+        "item": "Be Better",
+        "complete": false
+    },
+    {
+        "user": "Andrew",
+        "item": "Learn Angular2",
+        "complete": false
+    },
+    {
+        "user": "Bren",
+        "item": "Learn RethinkDB",
+        "complete": false
+    },
+    {
+        "user": "Bren",
+        "item": "TLI Assignment 2",
+        "complete": false
+    },
+    {
+        "user": "Bren",
+        "item": "Learn iOS",
+        "complete": true
+    },
+    {
+        "user": "Apurv",
+        "item": "Learn Java",
+        "complete": true
+    },
+    {
+        "user": "Apurv",
+        "item": "Do the right thing",
+        "complete": false
+    },
+    {
+        "user": "Blake",
+        "item": "Learn Elasticsearch",
+        "complete": true
+    },
+    {
+        "user": "Blake",
+        "item": "Finish school",
+        "complete": false
+    }
+]
